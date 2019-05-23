@@ -4,17 +4,26 @@ const availabilityUrl = "https://gbfs.urbansharing.com/oslobysykkel.no/station_s
 
 let stations, lastUpdated;
 
-//get data
+//fetch data on load of document
+refresh();
+
+/* 
+==================================
+========= Data functions =========
+==================================
+*/
+
 async function getStationsData(url) {
     const response = await fetch(url);
     const data = await response.json();
-    lastUpdated = data.last_updated;
-    return data.data.stations
+    lastUpdated = data.last_updated; //update global variable with the time Oslo bysykkel last updated the fetched data
+    return data.data.stations //return the relevant data for further treatment
 }
 
-//combine data
 async function updateAvailability(oldData) {
     const updatedAvailabilityData = await getStationsData(availabilityUrl);
+
+    //connect objects with same station_id in oldData and updatedAvailabilityData and merge them
     const newData = oldData.map(station => {
         const stationAvailability = updatedAvailabilityData.find(stationAvailabilityData => {
            return stationAvailabilityData.station_id == station.station_id
@@ -26,11 +35,11 @@ async function updateAvailability(oldData) {
     return newData
 }
 
-//refresh data
 async function refresh() {
     try {
-        if(!stations) {stations = await getStationsData(stationsInfoUrl);}
+        if(!stations) {stations = await getStationsData(stationsInfoUrl)};
         const updatedData = await updateAvailability(stations);
+        
         stations = updatedData; //update global variable "stations" with new up-to-date data
         updateTable(updatedData);
         updateLastUpdatedText();
@@ -40,7 +49,11 @@ async function refresh() {
     }
 }
 
-//show data
+/* 
+===================================
+======== DOM Functions ============
+===================================
+*/
 
 function updateTable(array) {
     const tableBody = document.querySelector("tbody");
@@ -68,7 +81,11 @@ function updateLastUpdatedText(text) {
     }
 }
 
-//search for data 
+/* 
+-------------------------------------
+------------ Input/Search -----------
+-------------------------------------
+*/
 
 const searchInput = document.querySelector('.search');
 
