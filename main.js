@@ -28,6 +28,7 @@ async function updateAvailability(oldData) {
 //refresh data
 async function refresh() {
     try {
+        if(!stations) {stations = await getStationsData(stationsInfoUrl)}
         const updatedData = await updateAvailability(stations);
         stations = updatedData; //update global variable "stations" with new up-to-date data
         updateTable(updatedData);
