@@ -67,3 +67,22 @@ function updateLastUpdatedText(text) {
         textArea.textContent = text;
     }
 }
+
+//search for data 
+
+const searchInput = document.querySelector('.search');
+
+function findMatches(wordToMatch, stations) {
+    return stations.filter(station => {
+        const regex = new RegExp(wordToMatch, 'gi');
+        return station.name.match(regex)
+    });
+}
+
+function displayMatches() {
+    const matchArray = findMatches(this.value, stations);
+    updateTable(matchArray);
+}
+
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);
