@@ -25,7 +25,7 @@ async function updateAvailability(oldData) {
     return newData
 }
 
-//update data
+//refresh data
 async function refresh() {
     try {
         const updatedData = await updateAvailability(stations);
@@ -38,3 +38,17 @@ async function refresh() {
 }
 
 //show data
+
+function updateTable(array) {
+    const tableBody = document.querySelector("tbody");
+    const html = array.map(station => {
+        return `
+            <tr id=${station.station_id}>
+                <td>${station.name}</td>
+                <td>${station.num_bikes_available} / ${station.capacity}</td>
+                <td>${station.num_docks_available}</td>
+            </tr>
+        `
+    }).join('')
+    tableBody.innerHTML = html;
+}
