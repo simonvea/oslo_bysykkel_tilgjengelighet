@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="no">
+    <head>
+        <meta charset="UTF-8">
+        <title>Oversikt Oslobysykkel</title>
+        <link type="text/css" rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Oversikt over sykkelstativ hos Oslobysykkel</h1>
+        </header>
+        <body>
+            <section class="update">
+                <button type="button" onclick="refresh()">Oppdater liste</button>
+                <p class="last-updated">Sist oppdatert: </p>
+                <form class="search-form">
+                    <input type="text" class="search" placeholder="Navn på stativ">
+                </form>
+            </section>
+            <section class="list-of-stations">
+                <table>
+                    <thead>
+                        <th scope="col">Navn på stativ</th>
+                        <th scope="col">Ledige sykler / Totalt</th>
+                        <th scope="col">Tilgjengelige låser</th>
+                    </thead>
+                    <tbody>
+                        <!-- Data comes here -->
+                    </tbody>
+                </table>
+            </section>
+        </body>
+    </body>
+    <script src="main.js"></script>
+</html>
