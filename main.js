@@ -2,12 +2,13 @@
 const stationsInfoUrl = "https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json";
 const availabilityUrl = "https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json";
 
-let stations;
+let stations, lastUpdated;
 
 //get data
 async function getStationsData(url) {
     const response = await fetch(url);
     const data = await response.json();
+    lastUpdated = data.last_updated;
     return data.data.stations
 }
 
@@ -28,13 +29,14 @@ async function updateAvailability(oldData) {
 //refresh data
 async function refresh() {
     try {
-        if(!stations) {stations = await getStationsData(stationsInfoUrl)}
+        if(!stations) {stations = await getStationsData(stationsInfoUrl);}
         const updatedData = await updateAvailability(stations);
         stations = updatedData; //update global variable "stations" with new up-to-date data
         updateTable(updatedData);
         updateLastUpdatedText();
     } catch(err) {
-        console.error("Error updating!", err)
+        console.error("Error updating!", err);
+        updateLastUpdatedText("Oppdatering feilet!");
     }
 }
 
@@ -52,4 +54,16 @@ function updateTable(array) {
         `
     }).join('')
     tableBody.innerHTML = html;
+}
+
+function updateLastUpdatedText(text) {
+    const textArea = document.querySelector(".last-updated");
+
+    if(!text) {
+        let time = parseInt(String(lastUpdated).padEnd(13,0)); //Make lastUpdated usable in Date object by transforming it from seconds to milliseconds since 1970 (adds 3 digits)
+        time = new Date(time).toLocaleString();
+        textArea.textContent = `Sist oppdatert: ${time}`;
+    } else {
+        textArea.textContent = text;
+    }
 }
