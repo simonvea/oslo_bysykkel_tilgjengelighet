@@ -1,0 +1,140 @@
+/* 
+========================
+====== Variables =======
+========================
+ */
+
+ :root {
+    /* Colors */
+    --primary-color: #f7f4ea;
+    --primary-color-light: #fff;
+    --primary-color-dark: #c4c1b8;
+    --secondary-color: #75c9c8;
+    --secondary-color-light: #a8fcfb;
+    --secondary-color-dark: #429897;
+}
+
+/* 
+========================
+====== Main design =====
+========================
+ */
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { 
+    background-color: var(--primary-color);
+    color: #000000;
+}
+
+header {
+    text-align: center;
+    padding: 5vh;
+}
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+section {
+    padding: 2vh;
+}
+
+p {
+    padding: 2vh;
+    transition: all 1s ease-in-out;
+}
+
+/* 
+=============================
+===== Update section ========
+=============================
+ */
+
+.update-text {
+    height: 15px;
+}
+
+input {
+    border: 1px solid #BEBEBE;
+    border-radius: 2px;
+	padding: 7px;
+	transition: all 0.30s ease-in-out;
+	outline: none;	
+}
+
+input:focus {
+	box-shadow: 0 0 8px var(--secondary-color-dark);
+	border: 1px solid #88D5E9;
+}
+
+
+/* 
+=========================
+======= Table ===========
+=========================
+ */
+
+table {
+    border-collapse: collapse;
+    border: none;
+    margin-top: 30px;
+    margin: auto;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: var(--secondary-color);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--primary-color-light);
+}
+
+tr:nth-child(even) {
+    background-color: var(--secondary-color-light);
+}
+
+tr:hover {
+    background-color: var(--secondary-color);
+}
+
+
+/* 
+=========================
+======== Buttons ========
+=========================
+ */
+
+button {
+    background-color: var(--primary-color-dark); 
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 2px;
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 2px 0 var(--secondary-color-dark);
+}
+
+button:active {
+    box-shadow: 0 2px 2px 0 inset var(--secondary-color-dark);
+}
